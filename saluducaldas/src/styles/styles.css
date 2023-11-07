@@ -1,0 +1,206 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: rgba(66, 152, 191, 1);
+    color: #fff;
+    padding: 4px;
+}
+
+h1 {
+    font-size: 1.5em;
+    display: flex;
+    flex-direction: row;
+    padding-left: 92px;
+}
+
+.logo {
+    height: 68px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+.main-editar {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 50px;
+}
+
+.main-orden-medica {
+    margin: 0 auto;
+    width: 800px;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.citas {
+    padding: 0px 50px;
+}
+
+.busqueda-citas {
+    display: flex;
+    flex-direction: row;
+}
+
+.busqueda-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.lista-citas, .lista-historial-medico {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    margin-top: 20px;
+}
+
+.lista-citas th,
+.lista-citas td, 
+.lista-historial-medico th,
+.lista-historial-medico td {
+    padding: 10px;
+    text-align: center;
+}
+
+.lista-citas th, .lista-historial-medico th {
+    background-color: rgba(66, 152, 191, 1);
+    color: white;
+}
+
+.paginacion {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+}
+
+.paginacion-anterior,
+.paginacion-primera,
+.paginacion-siguiente,
+.paginacion-ultima,
+.paginacion-actual {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    border: 1px solid #ddd;
+}
+
+.paginacion-anterior:hover,
+.paginacion-primera:hover,
+.paginacion-siguiente:hover,
+.paginacion-ultima:hover {
+    background-color: lightgray;
+}
+
+.paginacion-actual {
+    background-color: rgba(66, 152, 191, 1);
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+}
+
+.observaciones-editar {
+    width: 500px;
+    height: 300px;
+    border-radius: 15px;
+}
+
+.botones-editar {
+    text-align: center;
+}
+
+.boton {
+    background-color: rgba(66, 152, 191, 1);;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #000;
+    cursor: pointer;
+}
+
+.boton:hover {
+    background-color: #ccc;
+}
+
+.nueva-orden-medica {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group2 {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.form-group3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+label {
+    font-weight: bold;
+}
+
+.observaciones-orden-medica {
+    width: 100%;
+    height: 200px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+input[type="submit"],
+input[type="reset"] {
+    background-color: rgba(66, 152, 191, 1);
+    color: white;
+    cursor: pointer;
+}
+
+#medicamento {
+    padding: 7px;
+    border-radius: 7px;
+}
+
+#numero-dosis{
+    width: 200px;
+    border-radius: 7px;
+    border: 1px solid;
+}
+
+footer {
+    width: 100%;
+    height: 81px;
+    position: fixed;
+    bottom: 0;
+    background-color: #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
