@@ -1,12 +1,13 @@
 import React from 'react'
 import '../styles/styles.css'
 import { Link } from "react-router-dom";
+import logo from '../assets/logo.jpg'
 
 function Editar() {
     return (
         <div>
             <header>
-                <img className="logo" src='./assets/logo.jpg' alt="logo" />
+                <img className="logo" src={logo} alt="logo" />
                 <h1>SaludUCaldas</h1>
             </header>
             <main className='main-editar'>
@@ -19,21 +20,21 @@ function Editar() {
                     <section className="historial-medico">
                         <table className="lista-historial-medico">
                             <thead>
-                                <th>Historial médico</th>
+                                <th>Resultados</th>
                                 <th></th>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>HOLA</td>
-                                    <td><Link to="observar">Observar</Link></td>
+                                    <td><Link className='link-lista' to="observar">Observar</Link></td>
                                 </tr>
                                 <tr>
                                     <td>HOLA</td>
-                                    <td><Link to="observar">Observar</Link></td>
+                                    <td><Link className='link-lista' to="observar">Observar</Link></td>
                                 </tr>
                                 <tr>
                                     <td>HOLA</td>
-                                    <td><Link to="observar">Observar</Link></td>
+                                    <td><Link className='link-lista' to="observar">Observar</Link></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -43,7 +44,7 @@ function Editar() {
             <div className="botones-editar">
                 <button type="button" className="guardar boton">Guardar</button>
                 <button type="button" className="imprimir boton">Imprimir</button>
-                <button type="button" className="generar-orden-medica boton"><Link to="orden-medica">Generar orden médica</Link></button>
+                <button type="button" className="generar-orden-medica boton"><Link className='link-boton' to="orden-medica">Generar orden médica</Link></button>
                 <button type="button" className="cancelar boton">Cancelar</button>
             </div>
             <footer>
