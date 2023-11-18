@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import '../styles/styles.css'
+import logo from '../assets/logo.jpg'
 
 function Inicio() {
   return (
     <div>
       <header>
-        <img className="logo" src='../assets/logo.jpg' alt="logo" />
+        <img className="logo" src={logo} alt="logo" />
         <h1>SaludUCaldas</h1>
       </header>
       <main className="main-inicio">
@@ -33,21 +34,21 @@ function Inicio() {
                 <td>Juan Pérez</td>
                 <td>123456789</td>
                 <td>Confirmado</td>
-                <td><Link to="editar">Editar</Link></td>
+                <td><Link className="link-lista" to="editar">Editar</Link></td>
               </tr>
               <tr>
                 <td>Cita 2</td>
                 <td>María García</td>
                 <td>987654321</td>
                 <td>Cancelado</td>
-                <td><Link to="editar">Editar</Link></td>
+                <td><Link className="link-lista" to="editar">Editar</Link></td>
               </tr>
               <tr>
                 <td>Cita 3</td>
                 <td>Pedro Rodríguez</td>
                 <td>654321987</td>
                 <td>Pendiente</td>
-                <td><Link to="editar">Editar</Link></td>
+                <td><Link className="link-lista" to="editar">Editar</Link></td>
               </tr>
             </tbody>
           </table>

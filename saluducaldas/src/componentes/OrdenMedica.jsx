@@ -1,11 +1,12 @@
 import React from 'react'
 import '../styles/styles.css'
+import logo from '../assets/logo.jpg'
 
 function OrdenMedica() {
     return (
         <div>
             <header>
-                <img className="logo" src='../assets/logo.jpg' alt="logo" />
+                <img className="logo" src={logo} alt="logo" />
                 <h1>SaludUCaldas</h1>
             </header>
             <main className='main-orden-medica'>
