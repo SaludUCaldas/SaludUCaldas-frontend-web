@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import '../styles/styles.css'
-import logo from '../assets/logo.jpg'
+import axios from 'axios'; // Asegúrate de tener axios instalado: npm install axios
+import '../styles/styles.css';
+import logo from '../assets/logo.jpg';
 
 function Inicio() {
+  const [citasMedicas, setCitasMedicas] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/citasMedicasW')
+      .then(response => {
+        setCitasMedicas(response.data.citasMedicas);
+      })
+      .catch(error => {
+        console.error('Error fetching citas médicas:', error);
+      });
+  }, []);
+
   return (
     <div>
       <header>
@@ -29,27 +42,15 @@ function Inicio() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Cita 1</td>
-                <td>Juan Pérez</td>
-                <td>123456789</td>
-                <td>Confirmado</td>
-                <td><Link className="link-lista" to="editar">Editar</Link></td>
-              </tr>
-              <tr>
-                <td>Cita 2</td>
-                <td>María García</td>
-                <td>987654321</td>
-                <td>Cancelado</td>
-                <td><Link className="link-lista" to="editar">Editar</Link></td>
-              </tr>
-              <tr>
-                <td>Cita 3</td>
-                <td>Pedro Rodríguez</td>
-                <td>654321987</td>
-                <td>Pendiente</td>
-                <td><Link className="link-lista" to="editar">Editar</Link></td>
-              </tr>
+              {citasMedicas.map(cita => (
+                <tr key={cita.id}>
+                  <td>{cita.id}</td>
+                  <td>{cita.paciente.nombre}</td>
+                  <td>{cita.paciente.cedula}</td>
+                  <td>{cita.estado}</td>
+                  <td><Link className="link-lista" to={`editar?id=${cita.id}`}>Editar</Link></td>
+                </tr>
+              ))}
             </tbody>
           </table>
           <div className="paginacion">
