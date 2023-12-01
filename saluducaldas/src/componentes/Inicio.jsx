@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from 'axios'; // Asegúrate de tener axios instalado: npm install axios
+import axios from 'axios'; 
 import '../styles/styles.css';
 import logo from '../assets/logo.jpg';
 
@@ -8,13 +8,19 @@ function Inicio() {
   const [citasMedicas, setCitasMedicas] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/citasMedicasW')
-      .then(response => {
-        setCitasMedicas(response.data.citasMedicas);
-      })
-      .catch(error => {
-        console.error('Error fetching citas médicas:', error);
-      });
+    const idDoctor = localStorage.getItem('id_doctor');
+
+    if (idDoctor) {
+      // const today = new Date().toISOString().split('T')[0];
+      
+      axios.get(`http://localhost:3000/api/citasMedicasW/${idDoctor}`)
+        .then(response => {
+          setCitasMedicas(response.data.citasMedicas);
+        })
+        .catch(error => {
+          console.error('Error fetching citas médicas:', error);
+        });
+    }
   }, []);
 
   return (
@@ -53,13 +59,13 @@ function Inicio() {
               ))}
             </tbody>
           </table>
-          <div className="paginacion">
+          {/* <div className="paginacion">
             <a href="pagina-anterior.html" className="paginacion-anterior">Anterior</a>
             <a href="pagina-1.html" className="paginacion-primera">1</a>
             <a href="pagina-2.html" className="paginacion-actual">2</a>
             <a href="pagina-siguiente.html" className="paginacion-siguiente">Siguiente</a>
             <a href="pagina-3.html" className="paginacion-ultima">Última</a>
-          </div>
+          </div> */}
         </section>
       </main>
       <footer>

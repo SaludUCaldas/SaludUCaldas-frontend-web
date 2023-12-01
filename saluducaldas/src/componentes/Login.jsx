@@ -30,6 +30,7 @@ function Login() {
             });
 
             console.log("Autenticación exitosa", response.data);
+            localStorage.setItem('id_doctor', response.data.id_doctor);
             navigate('/inicio')
         } catch (error) {
             console.error("Error de autenticación", error);
