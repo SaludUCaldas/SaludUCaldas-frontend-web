@@ -54,7 +54,7 @@ function Inicio() {
                   <td>{cita.paciente.nombre}</td>
                   <td>{cita.paciente.cedula}</td>
                   <td>{cita.estado}</td>
-                  <td><Link className="link-lista" to={`editar?id=${cita.id}`}>Editar</Link></td>
+                  <td><Link className="link-lista" to={`editar/${cita.id}`}>Editar</Link></td>
                 </tr>
               ))}
             </tbody>

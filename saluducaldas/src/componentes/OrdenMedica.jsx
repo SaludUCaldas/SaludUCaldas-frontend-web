@@ -29,7 +29,7 @@ function OrdenMedica() {
                         <input type="checkbox" name="requiere-autorizacion" id="requiere-autorizacion" />
                     </div>
                     <div class="form-group">
-                        <label for="observaciones">Observaciones</label>
+                        <label for="observaciones">Observaciones sobre el medicamento</label>
                         <textarea className='observaciones-orden-medica' name="observaciones" id="observaciones"></textarea>
                     </div>
                     <div class="form-group3">

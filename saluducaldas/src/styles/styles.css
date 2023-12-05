@@ -62,7 +62,8 @@ h2 {
 }
 
 .lista-citas,
-.lista-historial-medico {
+.lista-historial-medico,
+.lista-historiales-medicos {
     width: 100%;
     border-collapse: collapse;
     border: 1px solid #ddd;
@@ -72,13 +73,16 @@ h2 {
 .lista-citas th,
 .lista-citas td,
 .lista-historial-medico th,
-.lista-historial-medico td {
+.lista-historial-medico td,
+.lista-historiales-medicos th,
+.lista-historiales-medicos td {
     padding: 10px;
     text-align: center;
 }
 
 .lista-citas th,
-.lista-historial-medico th {
+.lista-historial-medico th, 
+.lista-historiales-medicos th {
     background-color: rgba(66, 152, 191, 1);
     color: white;
 }
@@ -240,6 +244,21 @@ Link {
     margin-top: 10px;
     border-radius: 5px;
     text-align: center;
+}
+
+
+.pdf-viewer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.pdf-viewer {
+    width: 65vw;
+    height: 80vh;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 footer {
