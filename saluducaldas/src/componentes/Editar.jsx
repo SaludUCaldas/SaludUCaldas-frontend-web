@@ -6,20 +6,17 @@ import axios from 'axios';
 
 function Editar() {
   const [historialesMedicos, setHistorialesMedicos] = useState([]);
+  const { id } = useParams();
   const PlantillaHistoria = "RESUMEN DE LA HISTORIA CLÍNICA: \nTIPO DE SERVICIO: \nSÍNTOMAS: \nEXÁMEN FÍSICO: "
 
   function imprimir() {
     window.print();
   }
 
-  const { id } = useParams();
-  console.log(id);
-
   useEffect(() => {
-    const idAfiliado = 2;
+    const idAfiliado = id;
 
     if (idAfiliado) {
-
       axios.get(`http://localhost:3000/api/historialesMedicos/${idAfiliado}`)
         .then(response => {
           setHistorialesMedicos(response.data.historialesMedicos);
@@ -51,7 +48,6 @@ function Editar() {
                 <tr>
                   <th></th>
                   <th>Historias clínicas pasadas</th>
-                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -59,14 +55,20 @@ function Editar() {
                   <tr key={historial.id}>
                     <td>{historial.id}</td>
                     <td>{historial.fecha_consulta}</td>
-                    <td>
-                      <Link className="link-lista" to={`observar?id_hm=${historial.id}`}>
-                        Observar
-                      </Link>
-                    </td>
                   </tr>
                 ))}
               </tbody>
+              <tfoot>
+                <tr>
+                  <td colSpan={2}>
+                    <button type="button" className="generar-orden-medica boton">
+                      <Link className="link-boton" to={`observar`}>
+                        Mostrar más detalles
+                      </Link>
+                    </button>
+                  </td>
+                </tr>
+              </tfoot>
             </table>
           </section>
         </div>
