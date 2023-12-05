@@ -1,7 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from '../assets/logo.jpg'
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-function Observar(props) {
+function Observar() {
+    const [historialesMedicos, setHistorialesMedicos] = useState([]);
+    const { id } = useParams();
+
+    useEffect(() => {
+        const idAfiliado = id;
+
+        if (idAfiliado) {
+            axios.get(`http://localhost:3000/api/historialesMedicos/${idAfiliado}`)
+                .then(response => {
+                    setHistorialesMedicos(response.data.historialesMedicos);
+                })
+                .catch(error => {
+                    console.error('Error fetching historiales médicos:', error);
+                });
+        }
+    }, []);
+
     return (
         <div>
             <div>
@@ -22,7 +41,15 @@ function Observar(props) {
                                 </tr>
                             </thead>
                             <tbody>
-
+                                {historialesMedicos.map(historial => (
+                                    <tr key={historial.id}>
+                                        <td>{historial.fecha_consulta}</td>
+                                        <td>{historial.diagnostico}</td>
+                                        <td>{historial.medicamento.nombre}</td>
+                                        <td>{historial.dosis}</td>
+                                        <td>{historial.observaciones}</td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </section>

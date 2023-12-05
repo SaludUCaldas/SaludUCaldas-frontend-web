@@ -81,7 +81,7 @@ h2 {
 }
 
 .lista-citas th,
-.lista-historial-medico th, 
+.lista-historial-medico th,
 .lista-historiales-medicos th {
     background-color: rgba(66, 152, 191, 1);
     color: white;
@@ -246,19 +246,8 @@ Link {
     text-align: center;
 }
 
-
-.pdf-viewer-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
-}
-
-.pdf-viewer {
-    width: 65vw;
-    height: 80vh;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.historiales-medicos {
+    padding: 0px 24px;
 }
 
 footer {
