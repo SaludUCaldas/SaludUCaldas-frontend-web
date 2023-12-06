@@ -8,18 +8,17 @@ function Observar() {
     const { id } = useParams();
 
     useEffect(() => {
-        const idAfiliado = id;
+        const fetchHistorialesMedicos = async () => {
+            try {
+                const response = await axios.get(`http://localhost:3000/api/historialesMedicos/${id}`);
+                setHistorialesMedicos(response.data.historialesMedicos);
+            } catch (error) {
+                console.error('Error fetching historiales médicos:', error);
+            }
+        };
 
-        if (idAfiliado) {
-            axios.get(`http://localhost:3000/api/historialesMedicos/${idAfiliado}`)
-                .then(response => {
-                    setHistorialesMedicos(response.data.historialesMedicos);
-                })
-                .catch(error => {
-                    console.error('Error fetching historiales médicos:', error);
-                });
-        }
-    }, []);
+        fetchHistorialesMedicos();
+    }, [id]);
 
     return (
         <div>
