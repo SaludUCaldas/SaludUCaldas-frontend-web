@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import logo from '../assets/logo.jpg';
 import '../styles/styles.css';
 import axios from 'axios';
 
 function Editar() {
   const [historialesMedicos, setHistorialesMedicos] = useState([]);
+
   const { id } = useParams();
-  const PlantillaHistoria = "RESUMEN DE LA HISTORIA CLÍNICA: \nTIPO DE SERVICIO: \nSÍNTOMAS: \nEXÁMEN FÍSICO: "
+  const PlantillaHistoria = "RESUMEN DE LA HISTORIA CLÍNICA: \n\nTIPO DE SERVICIO: \nSÍNTOMAS: \nEXÁMEN FÍSICO: \n\n"
+  const [observaciones, setObservaciones] = useState(PlantillaHistoria);
+
+  const history = useNavigate();
+
 
   function imprimir() {
     window.print();
@@ -26,6 +31,16 @@ function Editar() {
     fetchHistorialesMedicos();
   }, [id]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    history(`/inicio/editar/${id}/orden-medica`, {
+      state: {
+        observaciones: observaciones,
+      }
+    });
+  };
+
   return (
     <div>
       <header>
@@ -37,7 +52,12 @@ function Editar() {
         <div className="container">
           <section className="observaciones">
             <h3>Observaciones</h3>
-            <textarea className='observaciones-editar' cols="30" rows="10">
+            <textarea
+              className='observaciones-editar'
+              cols="30"
+              rows="10"
+              value={observaciones}
+              onChange={(e) => setObservaciones(e.target.value)}>
               {PlantillaHistoria}
             </textarea>
           </section>
@@ -79,7 +99,7 @@ function Editar() {
         <button type="button" className="imprimir boton" onClick={() => imprimir()}>
           Imprimir
         </button>
-        <button type="button" className="generar-orden-medica boton">
+        <button type="button" className="generar-orden-medica boton" onClick={handleSubmit}>
           <Link className="link-boton" to="orden-medica">
             Generar orden médica
           </Link>
