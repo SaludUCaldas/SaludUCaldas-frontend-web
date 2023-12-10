@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../styles/styles.css'
 import logo from '../assets/logo.jpg'
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 function OrdenMedica() {
     const [medicamentos, setMedicamentos] = useState([]);
@@ -14,6 +14,8 @@ function OrdenMedica() {
 
     const location = useLocation();
     const { state } = location;
+    const { id } = useParams();
+    const idDoctor = localStorage.getItem('id_doctor');
 
     useEffect(() => {
         if (state && state.observaciones) {
@@ -44,7 +46,7 @@ function OrdenMedica() {
             const selected = medicamentos.find(medicamento => medicamento.id === parseInt(selectedId));
             setSelectedMedicamento(selected);
             setRequiereAutorizacion(selected.requiere_autorizacion);
-            setObservacionesMedicamento(`MEDICAMENTO ASIGNADO\n${selected.nombre}\n${selected.descripcion}\n\nINSTRUCCIONES DE USO DEL MEDICAMENTO:\n\n\nCantidad: ${numeroDosis}`)
+            setObservacionesMedicamento(`MEDICAMENTO ASIGNADO:\n${selected.nombre}\n${selected.descripcion}\n\nINSTRUCCIONES DE USO DEL MEDICAMENTO:\n\n\nCantidad: ${numeroDosis}`)
         }
     };
 
@@ -57,8 +59,34 @@ function OrdenMedica() {
             return; // No hay medicamento seleccionado
         }
 
-        const nuevasObservaciones = `MEDICAMENTO ASIGNADO\n${medicamento.nombre}\n${medicamento.descripcion}\n\nINSTRUCCIONES DE USO DEL MEDICAMENTO:\nCantidad: ${dosis}`;
+        const nuevasObservaciones = `MEDICAMENTO ASIGNADO:\n${medicamento.nombre}\n${medicamento.descripcion}\n\nINSTRUCCIONES DE USO DEL MEDICAMENTO:\nCantidad: ${dosis}`;
         setObservacionesMedicamento(nuevasObservaciones);
+    };
+
+    const getCurrentDate = () => {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0'); // Los meses comienzan desde 0
+        const day = String(now.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+
+    const createHistorialMedico = async () => {
+        try {
+            const response = await axios.post('http://localhost:3000/api/historialMedico', {
+                id_afiliado: id,
+                id_doctor: idDoctor,
+                fecha_consulta: getCurrentDate(),
+                diagnostico: observaciones,
+                id_medicamento: selectedMedicamento.id,
+                dosis: numeroDosis,
+                observaciones: observacionesMedicamento,
+            });
+
+            console.log(response.data); // Esto mostrará el mensaje de éxito en la consola
+        } catch (error) {
+            console.error('Error al crear historial médico:', error);
+        }
     };
 
     return (
@@ -118,7 +146,7 @@ function OrdenMedica() {
                         </textarea>
                     </div>
                     <div className="form-group3">
-                        <input className='boton' type="submit" value="Guardar" />
+                        <input className='boton' type="submit" value="Guardar" onClick={createHistorialMedico}/>
                         <input className='boton' type="reset" value="Cancelar" />
                     </div>
                 </form>
