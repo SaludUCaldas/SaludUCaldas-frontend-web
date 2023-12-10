@@ -10,12 +10,11 @@ function App() {
   return (
     <div className="Aplicacion">
       <Routes>
-        <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
-        <Route path="inicio" element={<Inicio />} />
-        <Route path="inicio/editar/:id" element={<Editar />} />
-        <Route path="inicio/editar/:id/observar" element={<Observar />} />
-        <Route path='inicio/editar/:id/orden-medica' element={<OrdenMedica />} />
+        <Route path="/inicio" element={<Inicio />} />
+        <Route path="/inicio/editar/:id/observar" element={<Observar />} />
+        <Route path="/inicio/editar/:id" element={<Editar />} />
+        <Route path='/inicio/editar/:id/orden-medica' element={<OrdenMedica />} />
       </Routes>
     </div>
   );
