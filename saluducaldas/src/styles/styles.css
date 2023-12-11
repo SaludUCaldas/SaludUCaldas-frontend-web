@@ -229,6 +229,12 @@ input[type="reset"] {
     opacity: 0.5;
 }
 
+.link-lista.disabled {
+    pointer-events: none;
+    color: #808080;
+    cursor: not-allowed;
+}
+
 Link {
     text-decoration: none;
 }

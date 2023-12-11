@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../styles/styles.css'
 import logo from '../assets/logo.jpg'
 import axios from 'axios';
-import { useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import CountdownTimer from "../util/Contador.jsx";
 
 function OrdenMedica() {
@@ -12,8 +12,10 @@ function OrdenMedica() {
     const [observaciones, setObservaciones] = useState('');
     const [observacionesMedicamento, setObservacionesMedicamento] = useState('');
     const [numeroDosis, setNumeroDosis] = useState();
+    const [historialCreado, setHistorialCreado] = useState(false);
 
     const location = useLocation();
+    const navigate = useNavigate();
     const { state } = location;
     const { id } = useParams();
     const idDoctor = localStorage.getItem('id_doctor');
@@ -84,7 +86,13 @@ function OrdenMedica() {
                 observaciones: observacionesMedicamento,
             });
 
-            console.log(response.data); // Esto mostrará el mensaje de éxito en la consola
+            console.log(response.data);
+            setHistorialCreado(true);
+
+            const citaMedicaId = id;
+            await axios.put(`http://localhost:3000/api/citaMedica/${citaMedicaId}`, {
+                estado: 'Terminada', 
+            });
         } catch (error) {
             console.error('Error al crear historial médico:', error);
         }
@@ -97,6 +105,25 @@ function OrdenMedica() {
 
     const handleTimeout = () => {
         console.log("Countdown reached 0!");
+    };
+
+    const handleGuardarHistorialMedico = () => {
+        if (historialCreado) {
+            // Evitar operación duplicada
+            console.log('El historial médico ya ha sido creado.');
+            return;
+        }
+
+        const confirmacion = window.confirm(
+            '¿Estás seguro de guardar el historial médico?\n\nRecuerde que al guardar ya no podrá volver a lo que hizo antes.'
+        );
+
+        if (confirmacion) {
+            createHistorialMedico();
+        } else {
+            navigate(`/inicio/editar/${id}/orden-medica`);
+            console.log('Guardado cancelado por el usuario');
+        }
     };
 
     return (
@@ -160,7 +187,9 @@ function OrdenMedica() {
                                 </textarea>
                             </div>
                             <div className="form-group3">
-                                <input className='boton' type="submit" value="Guardar" onClick={createHistorialMedico} />
+                                <button className='boton' type="submit" value="Guardar" onClick={handleGuardarHistorialMedico}>
+                                    <Link className='link-boton' type='submit' to={`/inicio`}>Guardar</Link>
+                                </button>
                                 <input className='boton' type="reset" value="Cancelar" />
                             </div>
                         </form>

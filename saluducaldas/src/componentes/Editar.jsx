@@ -4,7 +4,6 @@ import logo from '../assets/logo.jpg';
 import '../styles/styles.css';
 import axios from 'axios';
 import CountdownTimer from "../util/Contador.jsx";
-import { useCountdownContext } from '../util/ContadorContexto.js';
 
 function Editar() {
   const [historialesMedicos, setHistorialesMedicos] = useState([]);
