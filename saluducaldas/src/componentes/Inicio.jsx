@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from 'axios'; 
+import axios from 'axios';
 import '../styles/styles.css';
 import logo from '../assets/logo.jpg';
 
@@ -12,7 +12,7 @@ function Inicio() {
 
     if (idDoctor) {
       // const today = new Date().toISOString().split('T')[0];
-      
+
       axios.get(`http://localhost:3000/api/citasMedicasW/${idDoctor}`)
         .then(response => {
           setCitasMedicas(response.data.citasMedicas);
@@ -23,11 +23,19 @@ function Inicio() {
     }
   }, []);
 
+  const handleCerrarSesion = () => {
+    localStorage.removeItem('id_doctor');
+    window.location.href = '/login';
+  };
+
   return (
     <div>
       <header>
-        <img className="logo" src={logo} alt="logo" />
-        <h1>SaludUCaldas</h1>
+        <div className='nav-derecha'>
+          <img className="logo" src={logo} alt="logo" />
+          <h1>SaludUCaldas</h1>
+        </div>
+        <button className='boton' onClick={handleCerrarSesion}>Cerrar Sesión</button>
       </header>
       <main className="main-inicio">
         <section className="citas">

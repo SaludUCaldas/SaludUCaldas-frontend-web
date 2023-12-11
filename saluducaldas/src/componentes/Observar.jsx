@@ -20,12 +20,20 @@ function Observar() {
         fetchHistorialesMedicos();
     }, [id]);
 
+    const handleCerrarSesion = () => {
+        localStorage.removeItem('id_doctor');
+        window.location.href = '/login';
+    };
+
     return (
         <div>
             <div>
                 <header>
-                    <img className="logo" src={logo} alt="logo" />
-                    <h1>SaludUCaldas</h1>
+                    <div className='nav-derecha'>
+                        <img className="logo" src={logo} alt="logo" />
+                        <h1>SaludUCaldas</h1>
+                    </div>
+                    <button className='boton' onClick={handleCerrarSesion}>Cerrar Sesión</button>
                 </header>
                 <main className='main-observar'>
                     <section className='historiales-medicos'>
