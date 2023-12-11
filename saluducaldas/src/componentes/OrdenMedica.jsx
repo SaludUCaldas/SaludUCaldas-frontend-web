@@ -89,11 +89,19 @@ function OrdenMedica() {
         }
     };
 
+    const handleCerrarSesion = () => {
+        localStorage.removeItem('id_doctor');
+        window.location.href = '/login';
+    };
+
     return (
         <div>
             <header>
-                <img className="logo" src={logo} alt="logo" />
-                <h1>SaludUCaldas</h1>
+                <div className='nav-derecha'>
+                    <img className="logo" src={logo} alt="logo" />
+                    <h1>SaludUCaldas</h1>
+                </div>
+                <button className='boton' onClick={handleCerrarSesion}>Cerrar Sesión</button>
             </header>
             <main className='main-orden-medica'>
                 <form className='nueva-orden-medica'>
@@ -146,7 +154,7 @@ function OrdenMedica() {
                         </textarea>
                     </div>
                     <div className="form-group3">
-                        <input className='boton' type="submit" value="Guardar" onClick={createHistorialMedico}/>
+                        <input className='boton' type="submit" value="Guardar" onClick={createHistorialMedico} />
                         <input className='boton' type="reset" value="Cancelar" />
                     </div>
                 </form>

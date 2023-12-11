@@ -52,8 +52,10 @@ function Login() {
     return (
         <div>
             <header>
-                <img className="logo" src={logo} alt="logo" />
-                <h1>SaludUCaldas</h1>
+                <div className='nav-derecha'>
+                    <img className="logo" src={logo} alt="logo" />
+                    <h1>SaludUCaldas</h1>
+                </div>
             </header>
             <main className="main-login">
                 <form className="inicio-sesion" onSubmit={handleLogin} action="#">

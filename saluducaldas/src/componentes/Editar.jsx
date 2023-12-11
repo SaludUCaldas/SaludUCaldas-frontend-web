@@ -41,11 +41,19 @@ function Editar() {
     });
   };
 
+  const handleCerrarSesion = () => {
+    localStorage.removeItem('id_doctor');
+    window.location.href = '/login';
+  };
+
   return (
     <div>
       <header>
-        <img className="logo" src={logo} alt="logo" />
-        <h1>SaludUCaldas</h1>
+        <div className='nav-derecha'>
+          <img className="logo" src={logo} alt="logo" />
+          <h1>SaludUCaldas</h1>
+        </div>
+        <button className='boton' onClick={handleCerrarSesion}>Cerrar Sesión</button>
       </header>
       <main className="main-editar">
         <h2>Historial médico</h2>
