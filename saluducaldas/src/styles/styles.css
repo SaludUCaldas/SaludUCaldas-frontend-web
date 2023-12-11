@@ -43,11 +43,6 @@ section {
     padding: 0px 50px;
 }
 
-.main-orden-medica {
-    margin: 0 auto;
-    width: 800px;
-}
-
 h2 {
     font-size: 1.5em;
     margin-bottom: 10px;
@@ -131,7 +126,7 @@ h2 {
     justify-content: space-evenly;
 }
 
-.observaciones-editar, 
+.observaciones-editar,
 .observaciones-orden-medica {
     width: 500px;
     height: 300px;
@@ -249,6 +244,29 @@ Link {
 
 .historiales-medicos {
     padding: 0px 24px;
+}
+
+.countdown-timer {
+    font-size: 50px;
+    color: #ffffff;
+    background-color: rgba(66, 152, 191, 1);
+    padding: 8px;
+    border-radius: 4px;
+    margin-top: 4px;
+}
+
+.countdown-button {
+    padding: 8px;
+    background-color: #a72828;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.countdown-button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
 }
 
 footer {

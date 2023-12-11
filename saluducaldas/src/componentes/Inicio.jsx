@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import '../styles/styles.css';
 import logo from '../assets/logo.jpg';
+import { useCountdownContext } from "../util/ContadorContexto";
 
 function Inicio() {
   const [citasMedicas, setCitasMedicas] = useState([]);
+  const { setSelectedCitaId } = useCountdownContext();
 
   useEffect(() => {
     const idDoctor = localStorage.getItem('id_doctor');
 
     if (idDoctor) {
-      // const today = new Date().toISOString().split('T')[0];
-
       axios.get(`http://localhost:3000/api/citasMedicasW/${idDoctor}`)
         .then(response => {
           setCitasMedicas(response.data.citasMedicas);
@@ -28,6 +28,11 @@ function Inicio() {
     window.location.href = '/login';
   };
 
+  const handleSelectCita = (citaId) => {
+    console.log("Selected Cita ID:", citaId);
+    setSelectedCitaId(citaId);
+  };
+
   return (
     <div>
       <header>
@@ -39,12 +44,7 @@ function Inicio() {
       </header>
       <main className="main-inicio">
         <section className="citas">
-          <h2>Buscar</h2>
-          <form className="busqueda-citas">
-            <input className="busqueda-input" type="text" name="nombre" placeholder="Nombre" />
-            <input className="busqueda-input" type="number" name="cedula" placeholder="Cédula" />
-            <input className="busqueda-input" type="submit" value="Buscar" />
-          </form>
+          <h2>Citas médicas</h2>
           <table className="lista-citas">
             <thead>
               <tr>
@@ -52,6 +52,8 @@ function Inicio() {
                 <th>Paciente</th>
                 <th>Cédula</th>
                 <th>Estado</th>
+                <th>Hora inicio</th>
+                <th>Hora fin</th>
                 <th></th>
               </tr>
             </thead>
@@ -62,18 +64,16 @@ function Inicio() {
                   <td>{cita.paciente.nombre}</td>
                   <td>{cita.paciente.cedula}</td>
                   <td>{cita.estado}</td>
-                  <td><Link className="link-lista" to={`editar/${cita.id}`}>Editar</Link></td>
+                  <td>{cita.hora_inicio}</td>
+                  <td>{cita.hora_fin}</td>
+                  <td><Link
+                    className="link-lista"
+                    to={`editar/${cita.id}`}
+                  onClick={() => handleSelectCita(cita.id)}>Editar</Link></td>
                 </tr>
               ))}
             </tbody>
           </table>
-          {/* <div className="paginacion">
-            <a href="pagina-anterior.html" className="paginacion-anterior">Anterior</a>
-            <a href="pagina-1.html" className="paginacion-primera">1</a>
-            <a href="pagina-2.html" className="paginacion-actual">2</a>
-            <a href="pagina-siguiente.html" className="paginacion-siguiente">Siguiente</a>
-            <a href="pagina-3.html" className="paginacion-ultima">Última</a>
-          </div> */}
         </section>
       </main>
       <footer>

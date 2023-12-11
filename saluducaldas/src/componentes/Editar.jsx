@@ -3,6 +3,8 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import logo from '../assets/logo.jpg';
 import '../styles/styles.css';
 import axios from 'axios';
+import CountdownTimer from "../util/Contador.jsx";
+import { useCountdownContext } from '../util/ContadorContexto.js';
 
 function Editar() {
   const [historialesMedicos, setHistorialesMedicos] = useState([]);
@@ -12,7 +14,6 @@ function Editar() {
   const [observaciones, setObservaciones] = useState(PlantillaHistoria);
 
   const history = useNavigate();
-
 
   function imprimir() {
     window.print();
@@ -44,6 +45,10 @@ function Editar() {
   const handleCerrarSesion = () => {
     localStorage.removeItem('id_doctor');
     window.location.href = '/login';
+  };
+
+  const handleTimeout = () => {
+    console.log("Countdown reached 0!");
   };
 
   return (
@@ -97,6 +102,9 @@ function Editar() {
                 </tr>
               </tfoot>
             </table>
+          </section>
+          <section>
+            <CountdownTimer className="countdown-timer" initialTime={1200} onTimeout={handleTimeout} />
           </section>
         </div>
       </main>

@@ -5,7 +5,7 @@ import Editar from './componentes/Editar';
 import Observar from './componentes/Observar';
 import OrdenMedica from './componentes/OrdenMedica';
 import Login from './componentes/Login';
-import ProtectedRoutes from './componentes/ProtectedRoutes';
+import ProtectedRoutes from './util/ProtectedRoutes';
 
 function App() {
   return (
