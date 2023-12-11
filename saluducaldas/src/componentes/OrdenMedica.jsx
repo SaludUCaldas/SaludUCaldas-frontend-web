@@ -12,6 +12,7 @@ function OrdenMedica() {
     const [observaciones, setObservaciones] = useState('');
     const [observacionesMedicamento, setObservacionesMedicamento] = useState('');
     const [numeroDosis, setNumeroDosis] = useState();
+    const [historialCreado, setHistorialCreado] = useState(false);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -85,7 +86,13 @@ function OrdenMedica() {
                 observaciones: observacionesMedicamento,
             });
 
-            console.log(response.data); // Esto mostrará el mensaje de éxito en la consola
+            console.log(response.data);
+            setHistorialCreado(true);
+
+            const citaMedicaId = id;
+            await axios.put(`http://localhost:3000/api/citaMedica/${citaMedicaId}`, {
+                estado: 'Terminada', 
+            });
         } catch (error) {
             console.error('Error al crear historial médico:', error);
         }
@@ -101,12 +108,20 @@ function OrdenMedica() {
     };
 
     const handleGuardarHistorialMedico = () => {
-        const confirmacion = window.confirm('¿Estás seguro de guardar el historial médico?\n\nRecuerde que al guardar ya no podrá volver a lo que hizo antes.');
+        if (historialCreado) {
+            // Evitar operación duplicada
+            console.log('El historial médico ya ha sido creado.');
+            return;
+        }
+
+        const confirmacion = window.confirm(
+            '¿Estás seguro de guardar el historial médico?\n\nRecuerde que al guardar ya no podrá volver a lo que hizo antes.'
+        );
 
         if (confirmacion) {
             createHistorialMedico();
         } else {
-            navigate(`/inicio/editar/${id}/orden-medica`)
+            navigate(`/inicio/editar/${id}/orden-medica`);
             console.log('Guardado cancelado por el usuario');
         }
     };
@@ -173,7 +188,7 @@ function OrdenMedica() {
                             </div>
                             <div className="form-group3">
                                 <button className='boton' type="submit" value="Guardar" onClick={handleGuardarHistorialMedico}>
-                                    <Link className='link-boton' type='submit' onClick={createHistorialMedico} to={`/inicio`}>Guardar</Link>
+                                    <Link className='link-boton' type='submit' to={`/inicio`}>Guardar</Link>
                                 </button>
                                 <input className='boton' type="reset" value="Cancelar" />
                             </div>

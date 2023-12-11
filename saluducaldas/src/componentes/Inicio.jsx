@@ -45,6 +45,7 @@ function Inicio() {
       <main className="main-inicio">
         <section className="citas">
           <h2>Citas médicas</h2>
+          <h4>Recuerde actualizar constantemente la app</h4>
           <table className="lista-citas">
             <thead>
               <tr>
@@ -67,9 +68,10 @@ function Inicio() {
                   <td>{cita.hora_inicio}</td>
                   <td>{cita.hora_fin}</td>
                   <td><Link
-                    className="link-lista"
+                    className={`link-lista ${cita.estado === 'Terminada' ? 'disabled' : ''}`}
                     to={`editar/${cita.id}`}
-                  onClick={() => handleSelectCita(cita.id)}>Editar</Link></td>
+                    onClick={() => handleSelectCita(cita.id)}
+                  >Editar</Link></td>
                 </tr>
               ))}
             </tbody>
